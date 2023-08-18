@@ -169,6 +169,15 @@ define(['readium_shared_js/globals', 'text!version.json', 'jquery', 'underscore'
                 console.debug("RELATIVE URL: " + ebookURL);
                 
                 try {
+                    var showSensitive = getUrlParam('showSensitive') == 'y';
+                    if (!ebookURL) {
+                        if (showSensitive) {
+                            ebookURL = "view/sensitive"
+                        }
+                        else {
+                            ebookURL = "view/file"
+                        }
+                    }
                     ebookURL = new URI(ebookURL).absoluteTo(thisRootUrl).toString();
                 } catch(err) {
                     console.error(err);
